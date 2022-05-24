@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> Dashboard </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">                     
+    </head>
+    <body></br>
+        <div align="center">
+          <div align="center">
+             <div class="header">
+                <h1 class="word">BitPredict</h1>
+             </div></br>
+                <h1 class="bottom">
+                     Hello {{session.username}}!!</br></br> Welcome to the Bitcoin Price Prediction in Real time!!                
+                </h1></br>
+                <div id="chart1" style="position: relative; height:50vh; width:90vw"></div></br></br></br>
+                <div id="chart2" style="position: relative; height:50vh; width:90vw"></div></br></br></br>
+                <div id="chart3" style="position: relative; height:50vh; width:90vw"></div></br></br></br>
+                <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+                <br><br>
+          </div>
+        </div>
+
+        <!-- plotly CDN -->
+
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script type="text/javascript">
+            var graph1 = {{ graph1JSON | safe}};
+            Plotly.newPlot('chart1', graph1,{});
+            var graph2 = {{ graph2JSON | safe}};
+            Plotly.newPlot('chart2', graph2,{});
+            var graph3 = {{ graph3JSON | safe}};
+            Plotly.newPlot('chart3', graph3,{});
+        </script>
+    </body>
+</html>
